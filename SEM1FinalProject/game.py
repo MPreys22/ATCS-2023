@@ -14,10 +14,14 @@ class Game:
         pygame.init()
         pygame.mixer.init()
         self.clock = pygame.time.Clock()
+        self.time = 0
 
         # Game Window 
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
         self.screen.fill(self.BACKGROUND)
+        # To make the game a sidescroller, we will be changing the x value of the backgrounds position
+        self.background_x = 0
+        self.background_velo = 1
 
         # Laptop
         self.laptop_image = pygame.image.load("Assets/laptop.png")
@@ -26,24 +30,14 @@ class Game:
         # Codeblock
         self.codeblock_image = pygame.image.load("Assets/codeblock.png")
         self.codeblock = Codeblock(self.codeblock_image, 200, 200)
-
-        # Create the Bot's finite state machine (self.fsm) with initial state
-        # The s stands for still 
-        self.fsm = FSM('s')
-        self.init_fsm()
         
-
 
         # Set the caption of the screen 
         pygame.display.set_caption('CS JOURNEY') 
         self.background_img = pygame.image.load("Assets/BackGround.jpg")
         self.intro_music = pygame.mixer.Sound('Assets/Sounds/Music.wav')
 
-    # Add the transitions of the FSM. Insirtation taken from the mazebot lab
-    def init_fsm(self):
-        self.fsm.add_transition(0,'s', self.codeblock.chase, 'c')
-        self.fsm.add_transition(120, 'c', self.codeblock.inc_speed, 'lu' )
-        self.fsm.add_transition(0, 'lu', self.codeblock.chase, 'c')
+    
 
 
 
@@ -52,6 +46,7 @@ class Game:
 
         # game loop 
         while True: 
+            input = 0
             # for loop through the event queue   
             for event in pygame.event.get(): 
                 # Check for QUIT event       
@@ -60,10 +55,22 @@ class Game:
 
 
             # Update the display using flip 
-            self.screen.blit(self.background_img, (0, 0))
+            self.background_x -= self.background_velo
+            if self.background_x <= -self.background_img.get_width():
+                self.background_x = 0
+
+            self.screen.blit(self.background_img, (self.background_x, 0))
+            self.screen.blit(self.background_img, (self.background_x + self.background_img.get_width(), 0))
             self.laptop.draw(self.screen)
             self.codeblock.draw(self.screen)
-            self.clock.tick(60)
+
+            self.time += self.clock.tick(120)
+            
+            if self.time >= 120:
+                self.time = 0 
+                input = 120
+                self.background_velo += 1
+            self.codeblock.update(input)
 
             pygame.display.flip() 
 
