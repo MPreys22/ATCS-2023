@@ -10,12 +10,12 @@ class Laptop(pygame.sprite.Sprite):
         self.velo = 0
 
     def move_left(self):
-        self.velo -= 1
+        self.pos_x -= 1
     def move_right(self):
-        self.velo += 1
+        self.pos_x += 1
 
-    def update(self):
-        self.pos_x += self.velo
+    # def update(self):
+    #     self.pos_x += 1
 
     def draw(self, screen):
         screen.blit(self.image, (self.pos_x, self.pos_y))

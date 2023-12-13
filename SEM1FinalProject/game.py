@@ -79,7 +79,7 @@ class Game:
             if self.time >= 120:
                 self.time = 0 
                 input = 120
-                self.background_velo += 1
+                # self.background_velo += 1
             self.codeblock.update(input)
 
             pygame.display.flip() 
