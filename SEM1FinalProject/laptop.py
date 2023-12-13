@@ -10,9 +10,9 @@ class Laptop(pygame.sprite.Sprite):
         self.velo = 0
 
     def move_left(self):
-        self.pos_x -= 1
+        self.pos_x -= 5
     def move_right(self):
-        self.pos_x += 1
+        self.pos_x += 5
 
     # def update(self):
     #     self.pos_x += 1
