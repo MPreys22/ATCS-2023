@@ -35,14 +35,14 @@ class Game:
         # Set the caption of the screen 
         pygame.display.set_caption('CS JOURNEY') 
         self.background_img = pygame.image.load("Assets/BackGround.jpg")
-        self.intro_music = pygame.mixer.Sound('Assets/Sounds/Music.wav')
+        # self.intro_music = pygame.mixer.Sound('Assets/Sounds/Music.wav')
 
     
 
 
 
     def run(self):
-        self.intro_music.play()
+        # self.intro_music.play()
 
         # game loop 
         while True: 
@@ -63,6 +63,16 @@ class Game:
             self.screen.blit(self.background_img, (self.background_x + self.background_img.get_width(), 0))
             self.laptop.draw(self.screen)
             self.codeblock.draw(self.screen)
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    self.laptop.move_left()
+                    self.laptop.update()
+                if event.key == pygame.K_RIGHT:
+                    self.laptop.move_right()
+                    self.laptop.update()
+                # if event.key == pygame.K_UP:
+                #     self.laptop.jump()
 
             self.time += self.clock.tick(120)
             

@@ -5,6 +5,17 @@ class Laptop(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image  = image
         self.rect = self.image.get_rect()
+        self.pos_x = 0
+        self.pos_y = 300
+        self.velo = 0
+
+    def move_left(self):
+        self.velo -= 1
+    def move_right(self):
+        self.velo += 1
+
+    def update(self):
+        self.pos_x += self.velo
 
     def draw(self, screen):
-        screen.blit(self.image, (300, 300))
+        screen.blit(self.image, (self.pos_x, self.pos_y))
