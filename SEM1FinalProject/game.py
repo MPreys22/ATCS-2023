@@ -23,6 +23,9 @@ class Game:
         self.background_x = 0
         self.background_velo = 1
 
+        #Obstacle 
+        self.obstacle_image = pygame.image.load("Assets/brick.png")
+
         # Laptop
         self.laptop_image = pygame.image.load("Assets/laptop.png")
         self.laptop = Laptop(self.laptop_image, 500, 500)
@@ -71,8 +74,17 @@ class Game:
                 if event.key == pygame.K_RIGHT:
                     self.laptop.move_right()
                     self.laptop.update()
-                # if event.key == pygame.K_UP:
-                #     self.laptop.jump()
+                if event.key == pygame.K_UP:
+                    self.laptop.move_up()
+                    self.laptop.update
+                if event.key == pygame.K_DOWN:
+                    self.laptop.move_down()
+                    self.laptop.update
+            if self.codeblock.pos_x >= self.laptop.pos_x:
+                pygame.quit()
+            if self.laptop.pos_x >= 1000:
+                self.codeblock.pos_x = 0 
+                self.laptop.pos_x = 100
 
             self.time += self.clock.tick(120)
             

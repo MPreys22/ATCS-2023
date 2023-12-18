@@ -5,7 +5,7 @@ class Laptop(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image  = image
         self.rect = self.image.get_rect()
-        self.pos_x = 0
+        self.pos_x = 100
         self.pos_y = 300
         self.velo = 0
 
@@ -13,7 +13,10 @@ class Laptop(pygame.sprite.Sprite):
         self.pos_x -= 5
     def move_right(self):
         self.pos_x += 5
-
+    def move_up(self):
+        self.pos_y -=5
+    def move_down(self):
+        self.pos_y +=5
     # def update(self):
     #     self.pos_x += 1
 

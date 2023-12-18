@@ -29,7 +29,7 @@ class Codeblock(pygame.sprite.Sprite):
             self.pos_change = 1
 
     def inc_speed(self): 
-        self.pos_change += 1
+        self.pos_change += 0.25
 
 
     def update(self, time):
