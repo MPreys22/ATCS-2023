@@ -24,14 +24,17 @@ class Codeblock(pygame.sprite.Sprite):
         self.fsm.add_transition(120, 'c', self.inc_speed, 'inc' )
         self.fsm.add_transition(0, 'inc', self.chase, 'c')
 
+    # Initial state
     def chase(self):
         if self.pos_change == 0:
             self.pos_change = 1
 
+    # Change the velocity 
     def inc_speed(self): 
         self.pos_change += 0.25
+    
 
-
+    # Update the position of the codeblock 
     def update(self, time):
         self.fsm.process(time)
         self.pos_x += self.pos_change
